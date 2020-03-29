@@ -1,7 +1,7 @@
 ---
 - name: install git 
   hosts: all
-  remote_user: rob
+  remote_user:  {{ ansible_user_id }}
   become: yes
  
   tasks:

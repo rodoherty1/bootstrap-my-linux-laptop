@@ -1,9 +1,7 @@
 ---
 - name: install aws cli v2
   hosts: all
-  remote_user: rob
-  #become_method: sudo
-  #become_user: root
+  remote_user: {{ ansible_user_id }} 
   
   tasks:
   - name: Download AWS CLI zip
@@ -18,7 +16,7 @@
       dest: ~/tools
  
   - name: Install AWS CLI V2
-    command: /home/rob/tools/aws/install -u
+    command: /home/{{ ansible_user_id }}/tools/aws/install -u
     become: yes
 
   - name: Remove AWS CLI zip file

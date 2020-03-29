@@ -1,7 +1,7 @@
 ---
 - name: Download and Install Google Chrome
   hosts: all
-  remote_user: rob
+  remote_user: {{ ansible_user_id }}
   become: true 
   vars: 
     WORKING_DIR: /tmp

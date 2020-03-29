@@ -1,7 +1,7 @@
 ---
 - name: install IntelliJ
   hosts: all
-  remote_user: rob
+  remote_user: {{ ansible_user_id }}
   vars: 
     TOOLS_DIR: ~/tools
     DOWNLOAD_ARCHIVE: "{{ TOOLS_DIR }}/intellij.tar.gz"
