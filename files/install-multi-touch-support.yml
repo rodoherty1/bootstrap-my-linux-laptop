@@ -1,0 +1,66 @@
+---
+- name: install multi touch support
+  hosts: all
+  remote_user: rob
+  become: false
+
+  tasks: 
+  - name: Cloning Libinput-Gestures
+    git:
+      repo=https://github.com/bulletmark/libinput-gestures
+      dest=~/libinput-gestures
+
+  - name: Cloning gestures
+    git:
+      repo=https://gitlab.com/cunidev/gestures
+      dest=~/gestures
+
+  - name: get the username running the deploy
+    become: false
+    local_action: command whoami
+    register: user
+
+  - name: "Adding user {{ ansible_user_id }} to group input." 
+    user: 
+      name={{ ansible_user_id }}
+      shell=/usr/bin/zsh
+      groups=input
+      append=yes
+
+  - name: Install dependencies
+    apt:
+      pkg:
+      - wmctrl
+      - python3
+      - python3-setuptools
+      - xdotool
+      - python3-gi
+      - libinput-tools 
+      - python-gobject
+      update-cache: yes
+    become: true
+
+  - name: Debug make install
+    debug:
+      msg: Compiling /home/{{ ansible_user_id }}/libinput-gestures
+
+  - name: Make libinput-gestures
+    become: true
+    command: make install
+    args:
+      chdir: /home/{{ ansible_user_id }}/libinput-gestures
+    
+
+  - name: Run libinput-gestures-setup autostart
+    command: libinput-gestures-setup autostart
+  
+  - name: Run libinput-gestures-setup start
+    command: libinput-gestures-setup start
+
+  - name: Run install gestures
+    command: python3 setup.py install
+    become: true
+    args:
+      chdir: /home/{{ ansible_user_id }}/gestures
+
+

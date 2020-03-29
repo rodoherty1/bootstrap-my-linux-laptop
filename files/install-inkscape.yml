@@ -1,0 +1,12 @@
+---
+- name: install Inkscape
+  hosts: all
+  remote_user: rob
+  become: yes
+ 
+  tasks:
+  - name: Install Inkscape
+    apt:
+      name: inkscape
+      state: present
+

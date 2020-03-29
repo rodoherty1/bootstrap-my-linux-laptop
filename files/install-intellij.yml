@@ -1,0 +1,48 @@
+---
+- name: install IntelliJ
+  hosts: all
+  remote_user: rob
+  vars: 
+    TOOLS_DIR: ~/tools
+    DOWNLOAD_ARCHIVE: "{{ TOOLS_DIR }}/intellij.tar.gz"
+    DOWNLOAD_URL: https://download.jetbrains.com/idea/ideaIC-2019.3.4.tar.gz
+    SYMLINK: "{{ TOOLS_DIR }}/intellij" 
+  tasks:
+  - name: Download IntelliJ 
+    get_url:
+      url: "{{ DOWNLOAD_URL }}"
+      validate_certs: no
+      dest: "{{ DOWNLOAD_ARCHIVE }}"
+
+  - name: Unzip IntelliJ
+    unarchive:
+      src: "{{ DOWNLOAD_ARCHIVE }}"
+      dest: "{{ TOOLS_DIR }}"
+      list_files: yes
+    register: archive_contents
+
+  - name: Logging
+    debug:
+      msg: "{{ archive_contents.files[0] | dirname }}"
+
+  - name: Create Intellij symlink 
+    file:
+      src: "{{ TOOLS_DIR }}/{{ archive_contents.files[0] | dirname }}"
+      dest: "{{ SYMLINK }}"
+      state: link
+ 
+  - name: Add Intellij alias
+    lineinfile:
+      path: ~/shellenv.sh
+      line: "alias i='$TOOLS_DIR/intellij/bin/idea.sh'"
+      state: present
+      insertbefore: "# END ANSIBLE MANAGED BLOCK"
+
+  - name: Cleanup intelli download
+    file: 
+     path: "{{ DOWNLOAD_ARCHIVE }}" 
+     state: absent
+
+
+
+

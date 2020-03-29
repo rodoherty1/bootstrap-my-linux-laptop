@@ -1,0 +1,11 @@
+
+- hosts: all
+  become: no
+  vars:
+    the_user: "{{ ansible_user_id }}"
+  vars_prompt:
+  - name: "my_password"
+    prompt: "Enter password"
+    private: yes
+  roles:
+    - ansible-ohmyzsh

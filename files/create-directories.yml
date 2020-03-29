@@ -1,0 +1,19 @@
+---
+- name: Setup tools and workspace directories
+  hosts: all
+  remote_user: rob
+  
+  tasks:
+  - name: Create ~/tools
+    file:
+      path: ~/tools
+      state: directory
+      mode: '0755'
+
+  - name: Create ~/workspace
+    file:
+      path: ~/workspace
+      state: directory
+      mode: '0755'
+
+

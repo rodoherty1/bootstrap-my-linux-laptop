@@ -1,0 +1,27 @@
+---
+- name: Create Shell Environment Variables file
+  hosts: all
+  remote_user: rob
+  vars:
+    shell_env_file: ~/shellenv.sh
+ 
+  tasks:
+  - name: Create "{{ shell_env_file }}"
+    file:
+      path: "{{ shell_env_file }}"
+      state: touch
+      mode: '0755'
+
+  - name: Add environment variables
+    blockinfile:
+      path: "{{ shell_env_file }}"
+      block: |
+        alias vi='vim'
+        export TOOLS_DIR=~/tools
+
+  - name: Add import shellenv to bashrc
+    lineinfile:
+      path: ~/.bashrc
+      insertbefore: 'BOF'
+      line: source {{ shell_env_file }}
+

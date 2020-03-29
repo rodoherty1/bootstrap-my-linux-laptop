@@ -1,0 +1,11 @@
+---
+- import_playbook: create-shell-environment-variables.yml
+- import_playbook: create-directories.yml
+#- import_playbook: install-ohmyzsh.yml
+#- import_playbook: install-google-chrome.yml
+#- import_playbook: install-vim.yml
+#- import_playbook: install-inkscape.yml
+#- import_playbook: install-git.yml
+#- import_playbook: install-intellij.yml
+#- import_playbook: install-aws-cli.yml
+- import_playbook: install-multi-touch-support.yml
