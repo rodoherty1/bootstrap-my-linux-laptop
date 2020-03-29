@@ -1,0 +1,46 @@
+---
+- name: Setup C64 Dev Environment
+  hosts: all
+  remote_user: "{{ ansible_user_id }}"
+  become: false
+  vars: 
+    DOWNLOAD_TARGET_DIR: ~/tools
+    DOWNLOAD_ARCHIVE: "{{ DOWNLOAD_TARGET_DIR }}/vscode.tar.gz"
+    DOWNLOAD_URL: https://vscode-update.azurewebsites.net/latest/linux-x64/stable
+    SYMLINK: "{{ DOWNLOAD_TARGET_DIR }}/vscode"
+  
+  tasks:
+  - name: Download VSCode
+    get_url:
+      url: "{{ DOWNLOAD_URL }}"
+      validate_certs: no
+      dest: "{{ DOWNLOAD_ARCHIVE }}"
+
+  - name: "Extract {{ DOWNLOAD_ARCHIVE }} into {{ DOWNLOAD_TARGET_DIR }}"
+    unarchive:
+      src: "{{ DOWNLOAD_ARCHIVE }}"
+      dest: "{{ DOWNLOAD_TARGET_DIR }}"
+      list_files: yes
+    register: vscode_contents
+
+  - name: C64 Logging
+    debug:
+      msg: "{{ vscode_contents.files[0] | dirname }}"
+
+  - name: "Create VSCode symlink - {{ DOWNLOAD_TARGET_DIR }}/{{ vscode_contents.files[0] | dirname }} "
+    file:
+      src: "{{ DOWNLOAD_TARGET_DIR }}/{{ vscode_contents.files[0] | dirname }}"
+      dest: "{{ SYMLINK }}"
+      state: link
+
+  - name: Add VSCode to PATH
+    lineinfile:
+      path: ~/shellenv.sh
+      line: "export PATH=$PATH:$TOOLS_DIR/vscode/bin"
+      state: present
+      insertbefore: "# END ANSIBLE MANAGED BLOCK"
+
+  - name: Cleanup vscode download
+    file:
+     path: "{{ DOWNLOAD_ARCHIVE }}"
+     state: absent
