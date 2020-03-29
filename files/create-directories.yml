@@ -1,7 +1,7 @@
 ---
 - name: Setup tools and workspace directories
   hosts: all
-  remote_user: {{ ansible_user_id }}
+#  remote_user: "{{ ansible_user_id }}"
   
   tasks:
   - name: Create ~/tools

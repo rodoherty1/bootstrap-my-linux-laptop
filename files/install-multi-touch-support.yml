@@ -1,7 +1,7 @@
 ---
 - name: install multi touch support
   hosts: all
-  remote_user: {{ ansible_user_id }}
+#  remote_user: "{{ ansible_user_id }}"
   become: false
 
   tasks: 
