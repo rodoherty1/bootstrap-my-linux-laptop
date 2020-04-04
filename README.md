@@ -3,7 +3,7 @@
 
 ## Instructions
 
-The Ansible Play that installs te Vice emulator contains a task that downloads a tar.gz from an AWS S3 Bucket.
+The Ansible Play that installs the Vice emulator contains a task that downloads a tar.gz from an AWS S3 Bucket.
 The name of the bucket is passed in via the arguments to `ansible-playbook`.
 The AWS Access Key and Secret Access Key are set in `~/.ansible.cfg` which you will have to create yourself.
 
