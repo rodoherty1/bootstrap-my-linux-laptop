@@ -1,0 +1,16 @@
+---
+- name: Download Google Chrome
+  get_url:
+    url: "{{ DOWNLOAD_URL }}"
+    validate_certs: no
+    dest: "{{ DOWNLOAD_ARCHIVE }}"
+
+- name: Install chrome package
+  apt:
+    deb: "{{ DOWNLOAD_ARCHIVE }}"
+  become: true
+
+- name: Cleanup google chrome download
+  file: 
+   path: "{{ DOWNLOAD_ARCHIVE }}" 
+   state: absent

@@ -9,3 +9,4 @@
     private: yes
   roles:
     - ansible-ohmyzsh
+    - update-zshrc

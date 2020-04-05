@@ -1,12 +1,20 @@
 ---
-- import_playbook: files/create-shell-environment-variables.yml
-- import_playbook: files/create-directories.yml
-#- import_playbook: install-ohmyzsh.yml
-#- import_playbook: install-google-chrome.yml
-- import_playbook: files/install-c64-dev-env.yml
-#- import_playbook: install-vim.yml
-#- import_playbook: install-inkscape.yml
-#- import_playbook: install-git.yml
-#- import_playbook: install-intellij.yml
-#- import_playbook: install-aws-cli.yml
-#- import_playbook: files/install-multi-touch-support.yml
+- hosts: all 
+  roles:
+    - role: 'roles/install-packages'
+    - role: 'roles/install-google-chrome'
+    - role: 'roles/ansible-ohmyzsh'
+    - role: 'roles/update-zshrc'
+    - role: 'roles/setup-shell'
+    - role: 'roles/install-aws-cli'
+    - role: 'roles/install-intellij'
+    - role: 'roles/install-multi-touch-support'
+    - role: 'roles/install-c64-dev-env'
+  vars_prompt:
+    - name: password
+      prompt: "What is your password?"
+  
+  vars:
+    - shell_env_file: '{{ ansible_user_id }}/shellenv.sh'
+    - TOOLS_DIR: '{{ ansible_user_id }}/tools'
+
