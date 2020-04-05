@@ -22,4 +22,5 @@ Run the playbook as follows:
   * Add my own shell functions like `ns` and `mkcdir`
   * Move away from `aws-s3` module and use a public folder instead.
   * Reorganise the `install-ohmyzsh` script into the roles folder.
+  * Install Visual Studio Code plugins by the CLI
  
