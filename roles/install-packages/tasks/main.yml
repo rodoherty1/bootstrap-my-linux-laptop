@@ -1,0 +1,10 @@
+---
+  - name: Install some useful packages
+    apt:
+      pkg:
+      - git
+      - vim
+      - tree
+      - inkscape
+      state: present
+    become: true

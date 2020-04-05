@@ -28,28 +28,28 @@
     pip:
       name: ['boto3', 'botocore']
 
-  - name: Download VSCode
-    get_url:
-      url: "{{ DOWNLOAD_URL }}"
-      validate_certs: no
-      dest: "{{ DOWNLOAD_ARCHIVE }}"
+#  - name: Download VSCode
+#    get_url:
+#      url: "{{ DOWNLOAD_URL }}"
+#      validate_certs: no
+#      dest: "{{ DOWNLOAD_ARCHIVE }}"
 
-  - name: "Extract {{ DOWNLOAD_ARCHIVE }} into {{ DOWNLOAD_TARGET_DIR }}"
-    unarchive:
-      src: "{{ DOWNLOAD_ARCHIVE }}"
-      dest: "{{ DOWNLOAD_TARGET_DIR }}"
-      list_files: yes
-    register: vscode_contents
+#  - name: "Extract {{ DOWNLOAD_ARCHIVE }} into {{ DOWNLOAD_TARGET_DIR }}"
+#    unarchive:
+#      src: "{{ DOWNLOAD_ARCHIVE }}"
+#      dest: "{{ DOWNLOAD_TARGET_DIR }}"
+#      list_files: yes
+#    register: vscode_contents
 
 #  - name: C64 Logging
 #    debug:
 #      msg: "{{ vscode_contents.files[0] | dirname }}"
 
-  - name: "Create VSCode symlink - {{ DOWNLOAD_TARGET_DIR }}/{{ vscode_contents.files[0] | dirname }} "
-    file:
-      src: "{{ DOWNLOAD_TARGET_DIR }}/{{ vscode_contents.files[0] | dirname }}"
-      dest: "{{ SYMLINK }}"
-      state: link
+#  - name: "Create VSCode symlink - {{ DOWNLOAD_TARGET_DIR }}/{{ vscode_contents.files[0] | dirname }} "
+#    file:
+#      src: "{{ DOWNLOAD_TARGET_DIR }}/{{ vscode_contents.files[0] | dirname }}"
+#      dest: "{{ SYMLINK }}"
+#     state: link
 
   - name: Add VSCode to PATH
     lineinfile:
@@ -81,20 +81,19 @@
       state: present
     become: true
 
-  - name: Download vice-data from S3
-    aws_s3:
-      bucket: "{{ AWS_S3_BUCKET }}"
-      object: /vice-data.tar.gz
-      dest: '{{ DOWNLOAD_ARCHIVE }}'
-      mode: get
+#  - name: Download vice-data from S3
+#    aws_s3:
+#      bucket: "{{ AWS_S3_BUCKET }}"
+#      object: /vice-data.tar.gz
+#      dest: '{{ DOWNLOAD_ARCHIVE }}'
+#      mode: get
 
-
-  - name: Extract vice-data.tar.gz
-    unarchive:
-      src: "{{ DOWNLOAD_ARCHIVE }}"
-      dest: "{{ EXTRACT_TARGET_DIR }}"
-      list_files: yes
-    register: archive_contents
+#  - name: Extract vice-data.tar.gz
+#    unarchive:
+#      src: "{{ DOWNLOAD_ARCHIVE }}"
+#      dest: "{{ EXTRACT_TARGET_DIR }}"
+#      list_files: yes
+#    register: archive_contents
 
 #  - name: "Create TMP dir"
 #    file:
@@ -102,12 +101,12 @@
 #      state: directory
 #      mode: '0755'
    
-  - name: Copy vice-data contents to /usr/lib/vice
-    copy:
-      src: "{{ EXTRACT_TARGET_DIR }}/data/"
-      dest: /usr/lib/vice
-      remote_src: yes
-    become: true
+#  - name: Copy vice-data contents to /usr/lib/vice
+#    copy:
+#      src: "{{ EXTRACT_TARGET_DIR }}/data/"
+#      dest: /usr/lib/vice
+#      remote_src: yes
+#    become: true
 
 #  - name: Copy vice-data contents to /usr/lib/vice
 #    copy:
@@ -126,4 +125,9 @@
      path: "{{ DOWNLOAD_ARCHIVE }}" 
      state: absent
  
+  - name: Git clone acme-assembly-vscode-template
+    git:
+      repo=https://github.com/Esshahn/acme-assembly-vscode-template
+      dest=~/workspace/acme-assembly-vscode-template
+
 

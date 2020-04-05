@@ -1,0 +1,12 @@
+---
+- name: install vim
+  hosts: all
+  remote_user: {{ ansible_user_id }}
+  become: yes
+ 
+  tasks:
+  - name: Install vim
+    apt:
+      name: vim
+      state: present
+

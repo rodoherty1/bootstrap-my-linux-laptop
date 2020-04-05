@@ -1,9 +1,23 @@
 ---
-- import_playbook: files/create-shell-environment-variables.yml
-- import_playbook: files/create-directories.yml
+- hosts: all 
+  roles:
+    - role: 'roles/install-packages'
+    - role: 'roles/ansible-ohmyzsh'
+    - role: 'roles/update-zshrc'
+    - role: 'roles/setup-shell'
+
+  vars_prompt:
+    - name: password
+      prompt: "What is your password?"
+  
+  vars:
+    - shell_env_file: '{{ ansible_user_id }}/shellenv.sh'
+
+#- import_playbook: files/create-shell-environment-variables.yml
+#- import_playbook: files/create-directories.yml
 #- import_playbook: install-ohmyzsh.yml
 #- import_playbook: install-google-chrome.yml
-- import_playbook: files/install-c64-dev-env.yml
+#- import_playbook: files/install-c64-dev-env.yml
 #- import_playbook: install-vim.yml
 #- import_playbook: install-inkscape.yml
 #- import_playbook: install-git.yml

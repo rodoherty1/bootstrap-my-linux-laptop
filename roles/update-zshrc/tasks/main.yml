@@ -1,0 +1,10 @@
+
+
+  - name: Add import shellenv to bashrc
+    lineinfile:
+      path: ~/.zshrc
+      insertbefore: 'BOF'
+      line: source {{ shell_env_file }}
+
+
+
