@@ -2,6 +2,7 @@
 - hosts: all 
   roles:
     - role: 'roles/install-packages'
+    - role: 'roles/install-google-chrome'
     - role: 'roles/ansible-ohmyzsh'
     - role: 'roles/update-zshrc'
     - role: 'roles/setup-shell'
@@ -12,6 +13,7 @@
   
   vars:
     - shell_env_file: '{{ ansible_user_id }}/shellenv.sh'
+    - TOOLS_DIR: '{{ ansible_user_id }}/tools'
 
 #- import_playbook: files/create-shell-environment-variables.yml
 #- import_playbook: files/create-directories.yml
