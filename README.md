@@ -16,3 +16,9 @@ Run the playbook as follows:
 
     $ ansible-playbook -u <your_username> site.yml --extra-vars=AWS_S3_BUCKET=<your-aws-s3-bucket>
 
+
+## TODO
+  * Add zsh plugins like git, docker, aws
+  * Add my own shell functions like `ns` and `mkcdir`
+  * Reorganise the `install-ohmyzsh` script into the roles folder.
+ 
