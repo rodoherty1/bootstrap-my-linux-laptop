@@ -1,0 +1,21 @@
+---
+- name: Download AWS CLI zip
+  get_url:
+    url: https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip 
+    validate_certs: no
+    dest: ~/tools/awscliv2.zip
+
+- name: Unzip AWS CLI zip
+  unarchive:
+    src: ~/tools/awscliv2.zip
+    dest: ~/tools
+ 
+- name: Install AWS CLI V2
+  command: /home/{{ ansible_user_id }}/tools/aws/install -u
+  become: yes
+
+- name: Remove AWS CLI zip file
+  file: 
+    path: ~/tools/awscliv2.zip
+    state: absent
+
