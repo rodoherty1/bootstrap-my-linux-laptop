@@ -1,9 +1,6 @@
 ---
 - name: Create Shell Environment Variables file
   hosts: all
-#  remote_user: "{{ ansible_user_id }}"
-#  vars:
-#    shell_env_file: ~/shellenv.sh
  
   tasks:
   - name: Install tree

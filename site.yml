@@ -15,6 +15,6 @@
       prompt: "What is your password?"
   
   vars:
-    - shell_env_file: '{{ ansible_user_id }}/shellenv.sh'
-    - TOOLS_DIR: '{{ ansible_user_id }}/tools'
+    - shell_env_file: '/home/{{ ansible_user_id }}/shellenv.sh'
+    - TOOLS_DIR: '/home/{{ ansible_user_id }}/tools'
 

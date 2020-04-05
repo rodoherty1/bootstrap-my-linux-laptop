@@ -1,12 +1,11 @@
 ---
 - name: Setup tools and workspace directories
   hosts: all
-#  remote_user: "{{ ansible_user_id }}"
   
   tasks:
-  - name: Create ~/tools
+  - name: 'Create {{ TOOLS_DIR }}'
     file:
-      path: ~/tools
+      path: '{{ TOOLS_DIR }}'
       state: directory
       mode: '0755'
 
