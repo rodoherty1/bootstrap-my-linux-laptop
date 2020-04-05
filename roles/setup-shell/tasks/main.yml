@@ -1,0 +1,48 @@
+---
+- name: 'Create {{ TOOLS_DIR }}'
+  file:
+    path: '{{ TOOLS_DIR }}'
+    state: directory
+    mode: '0755'
+
+- name: Create ~/workspace
+  file:
+    path: ~/workspace
+    state: directory
+    mode: '0755'
+
+- name: Install tree
+  apt: 
+    pkg: tree
+    state: present
+
+- name: Create "{{ shell_env_file }}"
+  file:
+      path: "{{ shell_env_file }}"
+      state: touch
+      mode: '0755'
+
+- name: "Add environment variables and utils to {{ shell_env_file }}"
+  blockinfile:
+    path: "{{ shell_env_file }}"
+    block: |
+      alias vi='vim'
+      export TOOLS_DIR=~/tools
+     
+      ns() {
+      NEW_SCRATCH_DIR=~/workspace/scratch/src/main/resources/$(date +%b%d)
+      mkcdir $NEW_SCRATCH_DIR
+      touch $NEW_SCRATCH_DIR/scratch.txt
+      } 
+
+      mkcdir() {
+      mkdir -p -- "$1" && cd -P -- "$1"
+      }
+
+- name: Add import shellenv to bashrc
+  lineinfile:
+    path: ~/.bashrc
+    insertbefore: 'BOF'
+    line: source {{ shell_env_file }}
+
+
