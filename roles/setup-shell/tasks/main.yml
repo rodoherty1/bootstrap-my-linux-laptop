@@ -45,4 +45,12 @@
     insertbefore: 'BOF'
     line: source {{ shell_env_file }}
 
+- name: Add vimrc file
+  blockinfile:
+    path: '/home/{{ ansible_user_id }}/.vimrc'
+    marker: ''
+    block: |
+      set number
+      set background=dark
+
 

@@ -18,7 +18,6 @@ Run the playbook as follows:
 
 
 ## TODO
-  * Add zsh plugins like git, docker, aws
   * Move away from `aws-s3` module and use a public folder instead.
   * Reorganise the `install-ohmyzsh` script into the roles folder.
  
