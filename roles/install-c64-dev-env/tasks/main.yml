@@ -118,4 +118,5 @@
     repo=https://github.com/Esshahn/acme-assembly-vscode-template
     dest=~/workspace/acme-assembly-vscode-template
 
-
+- name: Install Visual Studio Code extensions
+  command: '{{ SYMLINK }}/bin/code --install-extension TonyLandi.acmecrossassembler'
