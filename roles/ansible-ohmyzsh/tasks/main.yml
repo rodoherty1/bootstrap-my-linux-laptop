@@ -36,3 +36,15 @@
     responses:
       (?i)password: "{{ password }}"
     #creates: ".shell_is_fish"
+
+
+## NOTE: Yaml requires escaping backslashes in double quotes but not in single quotes
+#- name: Ensure git, docker and 
+#  lineinfile:
+#    path: /opt/jboss-as/bin/standalone.conf
+#    regexp: '^plugins=\(.*\)'
+#    line: 'plugins=(git docker kubectl aws)'
+#    backrefs: yes
+
+
+

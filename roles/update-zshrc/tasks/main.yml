@@ -1,10 +1,17 @@
 
 
-  - name: Add import shellenv to bashrc
-    lineinfile:
-      path: ~/.zshrc
-      insertbefore: 'BOF'
-      line: source {{ shell_env_file }}
+- name: Add import shellenv to bashrc
+  lineinfile:
+    path: ~/.zshrc
+    insertbefore: 'BOF'
+    line: source {{ shell_env_file }}
 
+# NOTE: Yaml requires escaping backslashes in double quotes but not in single quotes
+- name: Ensure git, docker and
+  lineinfile:
+    path: '/home/{{ ansible_user_id }}/.zshrc'
+    regexp: '^plugins=\(.*\)'
+    line: 'plugins=(git docker kubectl aws)'
+    backrefs: yes
 
 
