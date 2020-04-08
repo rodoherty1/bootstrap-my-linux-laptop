@@ -2,14 +2,14 @@
 - hosts: all 
   roles:
     - role: 'roles/install-packages'
-#    - role: 'roles/install-google-chrome'
-#    - role: 'roles/ansible-ohmyzsh'
-#    - role: 'roles/update-zshrc'
+    - role: 'roles/install-google-chrome'
+    - role: 'roles/ansible-ohmyzsh'
+    - role: 'roles/update-zshrc'
     - role: 'roles/setup-shell'
-#    - role: 'roles/install-aws-cli'
-#    - role: 'roles/install-intellij'
-#    - role: 'roles/install-multi-touch-support'
-#    - role: 'roles/install-c64-dev-env'
+    - role: 'roles/install-aws-cli'
+    - role: 'roles/install-intellij'
+    - role: 'roles/install-multi-touch-support'
+    - role: 'roles/install-c64-dev-env'
   vars_prompt:
     - name: password
       prompt: "What is your password?"

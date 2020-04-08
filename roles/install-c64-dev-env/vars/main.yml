@@ -1,7 +1,7 @@
 ---
-DOWNLOAD_TARGET_DIR: "/home/{{ ansible_user_id }}/tools"
-EXTRACT_TARGET_DIR: "{{ DOWNLOAD_TARGET_DIR }}/vice-data"
-DOWNLOAD_ARCHIVE: "{{ EXTRACT_TARGET_DIR }}/vscode.tar.gz"
-DOWNLOAD_URL: https://vscode-update.azurewebsites.net/latest/linux-x64/stable
-SYMLINK: "{{ DOWNLOAD_TARGET_DIR }}/vscode"
+TOOLS_DIR: "/home/{{ ansible_user_id }}/tools"
+EXTRACT_VICEDATA_TARGET_DIR: "{{ TOOLS_DIR }}/vice-data"
+DOWNLOAD_VSCODE_ARCHIVE: "{{ EXTRACT_VICEDATA_TARGET_DIR }}/vscode.tar.gz"
+DOWNLOAD_VICE_URL: https://vscode-update.azurewebsites.net/latest/linux-x64/stable
+SYMLINK: "{{ TOOLS_DIR }}/vscode"
 
