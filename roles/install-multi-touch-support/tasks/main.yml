@@ -15,6 +15,7 @@
     shell=/usr/bin/zsh
     groups=input
     append=yes
+  become: true
 
 - name: Install dependencies
   apt:
