@@ -6,5 +6,5 @@
 
 Run the playbook as follows:
 
-    $ ansible-playbook -u <your_username> site.yml 
+    $ ansible-playbook -u <your_username> site.yml --extra-vars=password=<my_password>
 

@@ -1,5 +1,4 @@
 ---
-TOOLS_DIR: ~/tools
 DOWNLOAD_ARCHIVE: "{{ TOOLS_DIR }}/intellij.tar.gz"
 DOWNLOAD_URL: https://download.jetbrains.com/idea/ideaIC-2019.3.4.tar.gz
 SYMLINK: "{{ TOOLS_DIR }}/intellij" 

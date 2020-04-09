@@ -1,10 +1,9 @@
-
-
+---
 - name: Add import shellenv to bashrc
   lineinfile:
     path: ~/.zshrc
     insertbefore: 'BOF'
-    line: source {{ shell_env_file }}
+    line: 'source {{ shell_env_file }}'
 
 # NOTE: Yaml requires escaping backslashes in double quotes but not in single quotes
 - name: Ensure git, docker and
