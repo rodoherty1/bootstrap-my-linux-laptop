@@ -115,7 +115,23 @@
 - name: Git clone acme-assembly-vscode-template
   git:
     repo=https://github.com/Esshahn/acme-assembly-vscode-template
-    dest=~/workspace/acme-assembly-vscode-template
+    dest='{{ WORKSPACE_DIR }}/acme-assembly-vscode-template'
+
+- name: Git clone OldSkoolCoder tutorials
+  git:
+    repo=https://github.com/oldskoolcoder/Tutorials
+    dest='{{ WORKSPACE_DIR }}/oldskoolcoder'
+
+- name: Copy acme build files to OldSkoolCoder folder
+  copy:
+    src: '{{ WORKSPACE_DIR }}/acme-assembly-vscode-template/{{ item }}'
+    dest: '{{ WORKSPACE_DIR }}/oldskoolcoder'
+    remote_src: yes
+  with_items: 
+    - .vscode
+    - bin
+    - build
+
 
 - name: Install Visual Studio Code extensions
   command: '{{ SYMLINK }}/bin/code --install-extension TonyLandi.acmecrossassembler'

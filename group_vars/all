@@ -1,4 +1,4 @@
 ---
 TOOLS_DIR: '/home/{{ ansible_user_id }}/tools'
 shell_env_file: '/home/{{ ansible_user_id }}/shellenv.sh'
-
+WORKSPACE_DIR: '/home/{{ ansible_user_id }}/workspace'
