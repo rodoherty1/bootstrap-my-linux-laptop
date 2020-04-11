@@ -1,5 +1,5 @@
 
-# My Ansible scripts for rebuilding my personal laptop# Allow members of group sudo to execute any command
+# My Ansible scripts for rebuilding my personal laptop
 
 ## Instructions
 
