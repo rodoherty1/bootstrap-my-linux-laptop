@@ -3,7 +3,7 @@
 
 ## Instructions
 
-### Add user to /etc/sudoers
+### Enable passwordless sudo
 Launch `visudo`
 
     sudo visudo
