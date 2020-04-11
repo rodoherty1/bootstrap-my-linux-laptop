@@ -3,7 +3,11 @@
 
 ## Instructions
 
-### Add this like to /etc/sudoers
+### Add user to /etc/sudoers
+Launch `visudo`
+    sudo visudo
+
+Add this line at the end of  the section that reads `# Allow members of group sudo to execute any command`
     <your_username>     ALL=(ALL) NOPASSWD:ALL
 
 ### Install ansible, git and others
@@ -21,7 +25,9 @@
     sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2
     sudo update-alternatives --config python
 
-## /etc/ansible/hosts
+## Create /etc/ansible/hosts
+
+Replace the entire contents of `/etc/ansible/hosts` with the following:
 
     --- 
     all:
