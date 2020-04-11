@@ -1,13 +1,15 @@
 
-# My Ansible scripts for rebuilding my personal laptop
+# My Ansible scripts for rebuilding my personal laptop# Allow members of group sudo to execute any command
 
 ## Instructions
 
 ### Add user to /etc/sudoers
 Launch `visudo`
+
     sudo visudo
 
 Add this line at the end of  the section that reads `# Allow members of group sudo to execute any command`
+
     <your_username>     ALL=(ALL) NOPASSWD:ALL
 
 ### Install ansible, git and others
