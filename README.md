@@ -13,34 +13,15 @@ Add this line at the end of  the section that reads `# Allow members of group su
     <your_username>     ALL=(ALL) NOPASSWD:ALL
 
 ### Install ansible, git and others
-    sudo apt install -y ansible openssh-server git python3.7
+    sudo apt install -y git 
 
-### Enable ssh
-    sudo systemctl enable ssh
+### Clone this repo
+    git clone https://github.com/rodoherty1/bootstrap-my-linux-laptop
 
-## create ssh keys
-    ssh-keygen -t rsa -b 4096 -C "rob@localhost"
-    ssh-copy-id rob@localhost
+### Run the setup script
+    cd bootstrap-my-linux-laptop
+    ./setup.sh
 
-## Set python3 as the default
-    sudo update-alternatives --install /usr/bin/python python /usr/bin/python3.7 1
-    sudo update-alternatives --install /usr/bin/python python /usr/bin/python2.7 2
-    sudo update-alternatives --config python
-
-## Create /etc/ansible/hosts
-
-Replace the entire contents of `/etc/ansible/hosts` with the following:
-
-    --- 
-    all:
-      hosts:
-        localhost:
-          vars:
-            ansible_connection: local
-            ansible_python_inerpreter: "{{ansible_playbook_python}}"
-
-
-## Run the Ansible playbook
-
-    $ ansible-playbook -u <your_username> site.yml --extra-vars=password=<your_password>
+### Run the Ansible playbook
+    ansible-playbook -u $USER site.yml --extra-vars=password=<your_password>
 
