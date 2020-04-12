@@ -8,7 +8,7 @@ sudo systemctl enable ssh
 
 echo "Creating and installing ssh key"
 printf '\n\n\n' | ssh-keygen -t rsa -b 4096 -C "$USER@localhost"
-ssh-copy-id $USER@localhost
+yes | ssh-copy-id $USER@localhost
 
 echo "Creating /etc/ansible/hosts"
 sudo cp ./hosts /etc/ansible/hosts 
