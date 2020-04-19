@@ -119,7 +119,7 @@
 
 - name: Git clone OldSkoolCoder tutorials
   git:
-    repo=https://github.com/oldskoolcoder/Tutorials
+    repo=https://github.com/rodoherty1/Tutorials
     dest='{{ WORKSPACE_DIR }}/oldskoolcoder'
 
 - name: Copy acme build files to OldSkoolCoder folder
