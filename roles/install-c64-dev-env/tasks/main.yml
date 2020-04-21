@@ -66,8 +66,21 @@
     - cc65
     - cc65-doc
     - vice
+    - acme
     state: present
   become: true
+
+
+- name: Download vice-data from S3
+  get_url:
+    url: https://csdb.dk/release/download.php?id=210712
+    validate_certs: no
+    dest: '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
+
+- name: Extract C64Debugger
+  unarchive:
+    src: "{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}"
+    dest: "{{ EXTRACT_C64DEBUGGER_TARGET_DIR }}"
 
 - name: Download vice-data from S3
   get_url:
@@ -132,6 +145,8 @@
     - bin
     - build
 
-
-- name: Install Visual Studio Code extensions
+- name: Install Visual Studio Code extension - TonyLandi.acmecrossassembler
   command: '{{ SYMLINK }}/bin/code --install-extension TonyLandi.acmecrossassembler'
+
+- name: Install Visual Studio Code extension - rosc.vs64
+  command: '{{ SYMLINK }}/bin/code --install-extension rosc.vs64'
