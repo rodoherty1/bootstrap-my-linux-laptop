@@ -4,17 +4,26 @@
     path: "{{ EXTRACT_VICEDATA_TARGET_DIR }}"
     state: directory
     mode: '0755'
-   
-- name: Install python3 pip
+       
+- name: Install python3 pip and other libs
   apt:
     pkg:
     - python3-pip 
+    - ilibxcb-util-dev
     state: present
   become: true
 
 - name: Ensure boto and boto3 modules are installed
   pip:
     name: ['boto3', 'botocore']
+
+
+- name: 'Create softlink to libxcb-util.so.0'
+  file:
+    src: /lib/x86_64-linux-gnu/libxcb-util.so.1
+    dest: /lib/x86_64-linux-gnu/libxcb-util.so.0
+    state: link
+  become: true
 
 - name: Download VSCode
   get_url:
@@ -39,10 +48,10 @@
     dest: "{{ SYMLINK }}"
     state: link
 
-- name: Add VSCode to PATH
+- name: Add VSCode and C64Debugger to PATH
   lineinfile:
     path: ~/shellenv.sh
-    line: "export PATH=$PATH:$TOOLS_DIR/vscode/bin"
+    line: "export PATH=$PATH:$TOOLS_DIR/vscode/bin:$TOOLS_DIR/C64Debugger"
     state: present
     insertbefore: "# END ANSIBLE MANAGED BLOCK"
 
@@ -70,17 +79,15 @@
     state: present
   become: true
 
-
-- name: Download vice-data from S3
+- name: Download c64 debugger
   get_url:
-    url: https://csdb.dk/release/download.php?id=210712
-    validate_certs: no
+    url: http://csdb.dk/getinternalfile.php/174330/C64Debugger-v0.64.56-linux-x64.tar.gz 
     dest: '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
 
 - name: Extract C64Debugger
   unarchive:
-    src: "{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}"
-    dest: "{{ EXTRACT_C64DEBUGGER_TARGET_DIR }}"
+    src: '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
+    dest: '{{ EXTRACT_C64DEBUGGER_TARGET_DIR }}'
 
 - name: Download vice-data from S3
   get_url:
@@ -115,16 +122,15 @@
 #    remote_src: yes
 #  become: true
 
-- name: "Cleanup {{ EXTRACT_VICEDATA_TARGET_DIR }}"
+- name: 'Cleanup downloaded archives'
   file: 
-   path: "{{ EXTRACT_VICEDATA_TARGET_DIR }}" 
-   state: absent
+    path: '{{ item }}' 
+    state: absent
+  with_items:
+    - '{{ EXTRACT_VICEDATA_TARGET_DIR }}' 
+    - '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
+    - '{{ DOWNLOAD_VSCODE_ARCHIVE }}'
 
-- name: "Remove {{ DOWNLOAD_VSCODE_ARCHIVE }}"
-  file: 
-   path: "{{ DOWNLOAD_VSCODE_ARCHIVE }}" 
-   state: absent
- 
 - name: Git clone acme-assembly-vscode-template
   git:
     repo=https://github.com/Esshahn/acme-assembly-vscode-template
@@ -132,21 +138,31 @@
 
 - name: Git clone OldSkoolCoder tutorials
   git:
-    repo=https://github.com/rodoherty1/Tutorials
-    dest='{{ WORKSPACE_DIR }}/oldskoolcoder'
+    repo=https://github.com/rodoherty1/6502-Examples
+    dest='{{ WORKSPACE_DIR }}/6502-Examples'
 
-- name: Copy acme build files to OldSkoolCoder folder
-  copy:
-    src: '{{ WORKSPACE_DIR }}/acme-assembly-vscode-template/{{ item }}'
-    dest: '{{ WORKSPACE_DIR }}/oldskoolcoder'
-    remote_src: yes
-  with_items: 
-    - .vscode
-    - bin
-    - build
+- name: "Create CC65 c64-adm.cfg link"
+  file:
+    src: /usr/share/cc65/cfg/c64-asm.cfg
+    dest: '{{ WORKSPACE_DIR }}/6502-Examples/c64-adm.cfg'
+    state: link
+
+#- name: Copy acme build files to OldSkoolCoder folder
+#  copy:
+#    src: '{{ WORKSPACE_DIR }}/acme-assembly-vscode-template/{{ item }}'
+#    dest: '{{ WORKSPACE_DIR }}/oldskoolcoder'
+#    remote_src: yes
+#  with_items: 
+#    - .vscode
+#    - bin
+#    - build
 
 - name: Install Visual Studio Code extension - TonyLandi.acmecrossassembler
   command: '{{ SYMLINK }}/bin/code --install-extension TonyLandi.acmecrossassembler'
 
 - name: Install Visual Studio Code extension - rosc.vs64
   command: '{{ SYMLINK }}/bin/code --install-extension rosc.vs64'
+
+- name: Install Visual Studio Code extension - tlgkccampbell.code-ca65 
+  command: '{{ SYMLINK }}/bin/code --install-extension tlgkccampbell.code-ca65'
+
