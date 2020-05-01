@@ -59,4 +59,15 @@
       set number
       set background=dark
 
+- name: Install python3 pip and other libs
+  apt:
+    pkg:
+    - python3-pip 
+    state: present
+  become: true
+
+- name: Ensure pexpect is installed
+  pip:
+    name: ['pexpect']
+
 

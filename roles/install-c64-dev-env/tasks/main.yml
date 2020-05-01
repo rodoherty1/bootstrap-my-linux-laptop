@@ -9,7 +9,7 @@
   apt:
     pkg:
     - python3-pip 
-    - ilibxcb-util-dev
+    - libxcb-util-dev
     state: present
   become: true
 
@@ -38,10 +38,6 @@
     list_files: yes
   register: vscode_contents
 
-- name: C64 Logging
-  debug:
-    msg: "{{ vscode_contents.files[0] | dirname }}"
-
 - name: "Create VSCode symlink - {{ TOOLS_DIR }}/{{ vscode_contents.files[0] | dirname }} "
   file:
     src: "{{ TOOLS_DIR }}/{{ vscode_contents.files[0] | dirname }}"
@@ -60,14 +56,14 @@
    path: "{{ DOWNLOAD_VSCODE_ARCHIVE }}"
    state: absent
 
-- name: Install Python Dependencies 
-  apt:
-    pkg:
-    - python-boto3
-    - python-boto
-    - python-botocore
-    state: present
-  become: true
+#- name: Install Python Dependencies 
+#  apt:
+#    pkg:
+#    - python-boto3
+#    - python-boto
+#    - python-botocore
+#    state: present
+#  become: true
 
 - name: Install compiler and vice
   apt:
@@ -82,12 +78,12 @@
 - name: Download c64 debugger
   get_url:
     url: http://csdb.dk/getinternalfile.php/174330/C64Debugger-v0.64.56-linux-x64.tar.gz 
-    dest: '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
+    dest: '{{ TOOLS_DIR }}/C64Debugger-v0.64.56-linux-x64.tar.gz'
 
 - name: Extract C64Debugger
   unarchive:
-    src: '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
-    dest: '{{ EXTRACT_C64DEBUGGER_TARGET_DIR }}'
+    src: '{{ TOOLS_DIR }}/C64Debugger-v0.64.56-linux-x64.tar.gz'
+    dest: '{{ TOOLS_DIR }}'
 
 - name: Download vice-data from S3
   get_url:
@@ -130,6 +126,7 @@
     - '{{ EXTRACT_VICEDATA_TARGET_DIR }}' 
     - '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
     - '{{ DOWNLOAD_VSCODE_ARCHIVE }}'
+    - '{{ TOOLS_DIR }}/C64Debugger-v0.64.56-linux-x64.tar.gz'
 
 - name: Git clone acme-assembly-vscode-template
   git:
