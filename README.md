@@ -1,8 +1,26 @@
 
 # My Ansible scripts for rebuilding my personal laptop
 
-## Instructions
+## What does it do?
+This script installs the following on your Ubuntu-based laptop:
+* Ansible
+* Google Chrome
+* Inkscape
+* Python3
+* Vice C64 Emulator
+* Zsh and OhMyZsh
+* Visual Studio Code
+* IntelliJ
+* AWS CLI v2.0
+* Vim + minor customisations
+* Multi-touch tablet support
 
+## What Linux OSes does this work with?
+Ubuntu-based Linux distributions.
+
+I have tested it with the 20.04 editions of Ubuntu Mate, Pop!OS and Kubuntu.
+
+## Getting Started
 ### Enable passwordless sudo
 Launch `visudo`
 
