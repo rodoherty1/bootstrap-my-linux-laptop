@@ -3,17 +3,19 @@
 
 ## What does it do?
 This script installs the following on your Ubuntu-based laptop:
-* Ansible
 * Google Chrome
 * Inkscape
 * Python3
-* Vice C64 Emulator
-* Zsh and OhMyZsh
 * Visual Studio Code
 * IntelliJ
+* Ansible
 * AWS CLI v2.0
+* Zsh, OhMyZsh and a couple of plugins
 * Vim + minor customisations
 * Multi-touch tablet support
+* Vice C64 Emulator
+* CC65 6502 Assembler
+* Sample 6502 tutorials
 
 ## What Linux OSes does this work with?
 Ubuntu-based Linux distributions.
