@@ -3,7 +3,9 @@
   roles:
     - role: 'roles/install-packages'
     - role: 'roles/setup-shell'
-    - role: 'roles/install-google-chrome'
+    - role: 'roles/internet'
+    - role: 'roles/sound'
+    - role: 'roles/graphics'
     - role: 'roles/ansible-ohmyzsh'
     - role: 'roles/update-zshrc'
     - role: 'roles/install-c64-dev-env'
