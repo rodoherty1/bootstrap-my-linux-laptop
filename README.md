@@ -1,5 +1,5 @@
 
-# My Ansible scripts for rebuilding my personal laptop
+# Bootstrap your Ubuntu-based Laptop
 
 ## What does it do?
 This script installs the following on your Ubuntu-based laptop:
