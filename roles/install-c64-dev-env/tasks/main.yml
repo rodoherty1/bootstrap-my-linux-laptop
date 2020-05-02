@@ -124,9 +124,8 @@
     state: absent
   with_items:
     - '{{ EXTRACT_VICEDATA_TARGET_DIR }}' 
-    - '{{ DOWNLOAD_C64DEBUGGER_ARCHIVE }}'
-    - '{{ DOWNLOAD_VSCODE_ARCHIVE }}'
     - '{{ TOOLS_DIR }}/C64Debugger-v0.64.56-linux-x64.tar.gz'
+    - '{{ DOWNLOAD_VSCODE_ARCHIVE }}'
 
 - name: Git clone acme-assembly-vscode-template
   git:
