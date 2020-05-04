@@ -1,7 +1,6 @@
 - name: Graphics packages
   apt:
     pkg:
-    - shutter
     - inkscape
     - flameshot
     state: present

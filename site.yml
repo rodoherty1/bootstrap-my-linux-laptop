@@ -1,10 +1,10 @@
 ---
 - hosts: all 
   roles:
-    - role: 'roles/install-packages'
+    - role: 'roles/utilities'
     - role: 'roles/setup-shell'
     - role: 'roles/internet'
-    - role: 'roles/sound'
+    - role: 'roles/multimedia'
     - role: 'roles/graphics'
     - role: 'roles/ansible-ohmyzsh'
     - role: 'roles/update-zshrc'
