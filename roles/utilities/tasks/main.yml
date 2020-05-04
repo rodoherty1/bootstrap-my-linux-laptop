@@ -1,10 +1,9 @@
 ---
-  - name: Install some useful packages
+  - name: Utilities
     apt:
       pkg:
       - git
       - vim
       - tree
-      - inkscape
       state: present
     become: true

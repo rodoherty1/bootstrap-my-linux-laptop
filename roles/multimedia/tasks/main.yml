@@ -1,0 +1,14 @@
+- name: Sound packages
+  apt:
+    pkg:
+    - audacity
+    - shotcut
+    state: present
+  become: true
+
+- name: Add shotcut-big alias to shell_env
+  lineinfile:
+    path: '{{ shell_env_file }}'
+    insertbefore: 'BOF'
+    line: "shotcut-big='export QT_SCALE_FACTOR=2 && shotcut'"
+

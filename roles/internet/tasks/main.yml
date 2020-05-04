@@ -14,3 +14,11 @@
   file: 
    path: "{{ DOWNLOAD_ARCHIVE }}" 
    state: absent
+
+- name: Transmission Torrent Downloader
+  apt:
+    pkg:
+    - transmission
+    state: present
+  become: true
+

@@ -1,0 +1,7 @@
+- name: Graphics packages
+  apt:
+    pkg:
+    - inkscape
+    - flameshot
+    state: present
+  become: true
