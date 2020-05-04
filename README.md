@@ -12,7 +12,7 @@ This script installs the following on your Ubuntu-based laptop:
 * AWS CLI v2.0
 * Zsh, OhMyZsh and a couple of plugins
 * Vim + minor customisations
-* Multi-touch tablet support
+* Multi-touch trackpad support
 * Vice C64 Emulator
 * CC65 6502 Assembler
 * Sample 6502 tutorials
