@@ -17,6 +17,26 @@ This script installs the following on your Ubuntu-based laptop:
 * CC65 6502 Assembler
 * Sample 6502 tutorials
 
+# How do I to select which software is installed?
+Simply edit the `site.yml` file and place a `#` in front of any lines that you do not to be executed.
+
+For example, this change below will skip installation of the C64 Dev environment and the AWS CLI.
+```
+---
+- hosts: all 
+  roles:
+    - role: 'roles/utilities'
+    - role: 'roles/setup-shell'
+    - role: 'roles/internet'
+    - role: 'roles/multimedia'
+    - role: 'roles/graphics'
+    - role: 'roles/ansible-ohmyzsh'
+    - role: 'roles/update-zshrc'
+#    - role: 'roles/install-c64-dev-env'
+#    - role: 'roles/install-aws-cli'
+    - role: 'roles/install-multi-touch-support'
+```
+
 ## What Linux OSes does this work with?
 Ubuntu-based Linux distributions.
 
