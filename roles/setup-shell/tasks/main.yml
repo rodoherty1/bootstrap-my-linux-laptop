@@ -28,7 +28,10 @@
     block: |
       alias vi='vim'
       export TOOLS_DIR=~/tools
-     
+      
+      NEW_SCRATCH_DIR=~/workspace/scratch/src/main/resources/$(date +%b%d)
+      alias today='cd $NEW_SCRATCH_DIR'
+
       ns() {
       NEW_SCRATCH_DIR=~/workspace/scratch/src/main/resources/$(date +%b%d)
       mkcdir $NEW_SCRATCH_DIR
@@ -38,6 +41,12 @@
       mkcdir() {
       mkdir -p -- "$1" && cd -P -- "$1"
       }
+
+- name: Add scratch softlink 
+  lineinfile:
+    path: '{{ shell_env_file }}'
+    insertbefore: 'EOF'
+    line: 'ln -s /home/{{ ansible_user_id }}/workspace/scratch/src/main/resources /home/{{ ansible_user_id }}/scratch''
 
 - name: Add import shellenv to bashrc
   lineinfile:
