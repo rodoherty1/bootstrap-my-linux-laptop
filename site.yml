@@ -8,7 +8,7 @@
     - role: 'roles/graphics'
     - role: 'roles/ansible-ohmyzsh'
     - role: 'roles/update-zshrc'
-    - role: 'roles/install-c64-dev-env'
-    - role: 'roles/install-aws-cli'
-    - role: 'roles/install-multi-touch-support'
+    - role: 'roles/c64-dev-environment'
+    - role: 'roles/aws-cli'
+    - role: 'roles/multi-touch-support'
 

@@ -27,6 +27,7 @@
     path: "{{ shell_env_file }}"
     block: |
       ns() {
+      NEW_SCRATCH_DIR=~/scratch/$(date +%b%d)
       mkcdir $NEW_SCRATCH_DIR
       touch $NEW_SCRATCH_DIR/scratch.txt
       } 
@@ -41,7 +42,7 @@
     insertafter: 'BOF'
     line: '{{ item }}'
   with_items:
-    - alias today='cd $NEW_SCRATCH_DIR'
+    - alias today='cd ~/scratch/$(date +%b%d)'
     - alias vi='vim'
     - export TOOLS_DIR=~/tools
     - NEW_SCRATCH_DIR=~/scratch/$(date +%b%d)
