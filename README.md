@@ -32,9 +32,9 @@ For example, this change below will skip installation of the C64 Dev environment
     - role: 'roles/graphics'
     - role: 'roles/ansible-ohmyzsh'
     - role: 'roles/update-zshrc'
-#    - role: 'roles/install-c64-dev-env'
-#    - role: 'roles/install-aws-cli'
-    - role: 'roles/install-multi-touch-support'
+    #- role: 'roles/c64-dev-environment'
+    #- role: 'roles/aws-cli'
+    - role: 'roles/multi-touch-support'
 ```
 
 ## What Linux OSes does this work with?
